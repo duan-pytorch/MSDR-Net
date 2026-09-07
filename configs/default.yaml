@@ -1,0 +1,52 @@
+# =========================================================================
+# MSDR-Net default configuration (public release)
+#
+# NOTE: several key hyperparameters are REDACTED in this public release.
+# Reasonable placeholder values are shown below and used automatically by
+# the code (see private_params.py). For the exact key parameters used in
+# the paper experiments, please contact: a13995115025@163.com
+# =========================================================================
+
+data:
+  image_size: 224            # ROIs resized to 224x224 (bilinear)
+  num_classes: 2             # 0 = benign, 1 = malignant
+  clahe_tile_size: 8         # CLAHE tile grid 8x8
+  clahe_clip_limit: 2.0      # CLAHE contrast clipping limit
+  clip_percentiles: [0.5, 99.5]  # per-image intensity clipping range
+
+model:
+  in_channels: 3             # grayscale replicated to 3 channels
+  widths: [64, 128, 256, 512, 1024]   # channels of Stages 1-5
+  mbrb_kernels: [1, 3, 5]    # parallel multi-scale branch kernels
+  mlp_hidden_dim: 256        # [PLACEHOLDER] redacted; contact the author
+  mlp_dropout: 0.5           # [PLACEHOLDER] redacted; contact the author
+  eca_gamma: 2.0             # [PLACEHOLDER] redacted; contact the author
+  eca_beta: 1.0              # [PLACEHOLDER] redacted; contact the author
+
+training:
+  epochs: 200
+  batch_size: 16
+  optimizer: adamw           # beta1=0.9, beta2=0.999
+  init_lr: 0.0001            # [PLACEHOLDER] redacted; contact the author
+  weight_decay: 0.01         # [PLACEHOLDER] redacted; contact the author
+  lr_scheduler: multisteplr
+  lr_milestones: [80, 140]   # [PLACEHOLDER] redacted; contact the author
+  lr_gamma: 0.1              # [PLACEHOLDER] redacted; contact the author
+  amp: true                  # automatic mixed precision
+  early_stopping:
+    monitor: val_auc
+    patience: 20
+  class_weight_neg: 0.64     # [PLACEHOLDER] redacted; contact the author
+  class_weight_pos: 2.27     # [PLACEHOLDER] redacted; contact the author
+  seeds: [2021, 2022, 2023]  # three independent training runs
+  cv_seed: 2024              # single prespecified run per CV fold
+
+augmentation:                # training set only
+  hflip_p: 0.5               # random horizontal flip probability
+  rotation_deg: 10.0         # random rotation within +/-10 degrees
+  translate_frac: 0.05       # translation up to 5% of image dimensions
+  brightness_contrast: 0.10  # brightness/contrast perturbation +/-10%
+
+evaluation:
+  threshold: 0.5             # prespecified decision threshold
+  ece_bins: 10
