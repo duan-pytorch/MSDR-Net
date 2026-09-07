@@ -4,9 +4,7 @@
 
 This repository contains the implementation of **MSDR-Net**, described in the manuscript *"Multi-Scale Convolution with Efficient Channel Attention Improves Benign-Malignant Classification of Spinal Tumors on T2-Weighted Fat-Suppressed MRI"*.
 
-<p align="center">
-  <img src="docs/architecture.png" alt="MSDR-Net architecture" width="95%">
-</p>
+
 
 ## Architecture overview
 
