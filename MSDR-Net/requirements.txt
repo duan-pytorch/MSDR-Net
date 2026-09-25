@@ -1,0 +1,12 @@
+torch>=2.1.0
+torchvision>=0.16.0
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+pydicom>=2.4
+opencv-python>=4.8
+fvcore==0.1.6
+pyyaml>=6.0
+tqdm>=4.65
